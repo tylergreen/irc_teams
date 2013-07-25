@@ -1,8 +1,9 @@
-require "test/unit"
+require 'minitest/spec'
+require 'minitest/autorun'
 require "irc_teams"
 
-class TestIrcTeams < Test::Unit::TestCase
-  def test_sanity
-    flunk "write tests or I will kneecap you"
+describe IrcTeams do
+  it 'has tests' do
+    assert_equal(3, 1+2)
   end
 end
