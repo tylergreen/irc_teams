@@ -15,7 +15,7 @@ Hoe.spec 'irc_teams' do
   # you'll never have to touch them again!
   # (delete this comment too, of course)
 
-  # developer('FIX', 'FIX@example.com')
+  developer('tyler', 'tyler@example.com')
 
   # self.rubyforge_name = 'irc_teamsx' # if different than 'irc_teams'
 
