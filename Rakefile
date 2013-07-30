@@ -1,7 +1,15 @@
+$:.unshift File.expand_path("../lib", __FILE__)
 # -*- ruby -*-
 
 require 'rubygems'
 require 'hoe'
+require 'irc_teams'
+
+task :run_bot do
+  puts 'bot started'
+  i = IrcTeams.new
+  i.start
+end
 
 # Hoe.plugin :compiler
 # Hoe.plugin :gem_prelude_sucks
