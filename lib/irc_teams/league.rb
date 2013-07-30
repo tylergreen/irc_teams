@@ -1,3 +1,5 @@
+require 'irc_teams/team'
+
 class League
 
   attr_reader :teams
