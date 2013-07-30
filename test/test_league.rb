@@ -17,8 +17,9 @@ describe League do
   end
 
   it 'can remove someone from a team' do
+    assert( @league.add_player('Gervinho', 'Napoli'))
     assert( @league.remove_player('Gervinho', 'Napoli'))
-    assert(not(@league.find_team('Napoli').include?('Gervinho')))
+    assert(@league.find_team_by_player('Gervinho').nil?)
   end
 
   it 'can find what team a player is on' do
