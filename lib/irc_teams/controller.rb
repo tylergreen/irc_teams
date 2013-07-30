@@ -8,8 +8,8 @@ class Controller
   def create_team(team_name)
     begin
       @league.create_team(team_name)
-    rescue LeagueError
-      @view.show(:create_team_error, :team => team_name)
+    rescue LeagueError => e
+      @view.show(:create_team_error, :error_type => e.class, :team => team_name)
     else
       @view.show(:team_created, :team => team_name)
     end
@@ -19,10 +19,9 @@ class Controller
     begin
       bindings = { :player => player, :team => team_name }
       @league.add_player(player, team_name)
-    rescue NonExistentTeamError
-      @view.show(:non_existent_team_error, bindings)
-    rescue LeagueError
-      @view.show(:player_already_on_team_error, bindings)
+    rescue LeagueError => e
+      bindings[:error_type] = e.class 
+      @view.show(:error, bindings)
     else
       @view.show(:player_added, bindings)
     end
@@ -32,12 +31,9 @@ class Controller
     begin
       bindings = { :player => player, :team => team_name }
       @league.remove_player(player, team_name)
-    rescue NonExistentTeamError
-      @view.show(:non_existent_team_error, bindings)
-    rescue NonExistentPlayerError
-      @view.show(:non_existent_player_error, bindings)
-    rescue NotOnTeamError
-      @view.show(:not_on_team_error, bindings)
+    rescue LeagueError => e
+      bindings[:error_type] = e.class
+      @view.show(:error, bindings)
     else
       @view.show(:player_removed, bindings)
     end
@@ -61,7 +57,7 @@ class Controller
     begin
       @league.remove_team(team)
     rescue LeagueError => e
-      @view.show(:err, :error_type => e.class, :team => team)
+      @view.show(:error, :error_type => e.class, :team => team)
     else
       @view.show(:team_deleted, :team => team)
     end
@@ -69,7 +65,7 @@ class Controller
 
   def reset_league
     @league = League.new
-    @view.show(:league_reset, { })
+    @view.show(:reset_league, { })
   end
   
 end
