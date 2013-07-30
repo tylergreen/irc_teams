@@ -22,6 +22,11 @@ describe Controller do
                  @c.add_player('Ramsey', 'Arsenal'))
   end
 
+  it 'will not add someone to a non-existent team' do
+    assert_equal([:error, :error_type => NonExistentTeamError, :player => 'Ramsey', :team => 'Turnips' ],
+                 @c.add_player('Ramsey', 'Turnips'))
+    end
+
   it 'can remove a player' do
     assert_equal([:player_added, { :player => 'Ramsey', :team => 'Arsenal' } ],
                  @c.add_player('Ramsey', 'Arsenal'))
