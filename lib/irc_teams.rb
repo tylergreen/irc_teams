@@ -6,35 +6,34 @@ class Interface
 
   match /(.+)/, use_prefix: false
 
-  def initialize(bot=Bot.new)
-    super
-    @bot = bot
+  def initialize(arg)
+    super(arg)
+    @bot = Bot.new
   end
   
   def execute(m, message)
-    m.reply(@bot.process(m.user.nick,message))
+    m.reply(@bot.handle(m.user.nick, message))
   end
 end
 
 class IrcTeams
   VERSION = '1.0.0'
 
-  def initialize(bot = Interface,
-                 server="hobana.freenode.net",
+  def initialize(server="hobana.freenode.net",
                  nick="team-manager-bot",
                  channel="#super-duper")
-      @bot = Cinch::Bot.new do
+      @cinch = Cinch::Bot.new do
       configure do |c|
         c.server = server
         c.nick = nick
         c.channels = [channel]
-        c.plugins.plugins = [bot]
+        c.plugins.plugins = [Interface]
       end
     end
   end
 
   def start
-    @bot.start
+    @cinch.start
   end
   
 end
