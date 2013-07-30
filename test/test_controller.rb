@@ -53,7 +53,7 @@ describe Controller do
   end
 
   it 'can reset the league' do
-    assert_equal([:league_reset, { }], @c.reset_league)
+    assert_equal([:reset_league, { }], @c.reset_league)
   end
   
 end

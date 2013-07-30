@@ -13,7 +13,7 @@ describe League do
   end
 
   it 'will not create an existing team' do
-    assert_raises(LeagueError) { @league.create_team('Napoli') }
+    assert_raises(TeamAlreadyExistsError) { @league.create_team('Napoli') }
   end
 
   it 'can remove someone from a team' do
