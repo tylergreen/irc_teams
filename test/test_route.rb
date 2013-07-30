@@ -3,7 +3,7 @@ require 'utils/route'
 
 describe Route do
   before do
-    @r = Route.new(/join (.*)/) { |match_data| "joined #{match_data[1]}!" }
+    @r = Route.new(/join (.*)/) { |user, match_data| "#{user} joined #{match_data[1]}!" }
   end
 
   it 'can be matched and have its block evaluated' do
@@ -13,10 +13,10 @@ describe Route do
 
   it 'once matched, it can have its action executed' do
     @r.match('join rangers')
-    assert_equal(@r.exec, 'joined rangers!')
+    assert_equal(@r.exec('Jurgen'), 'Jurgen joined rangers!')
   end
 
   it "cannot be exec'd before matched" do
-    assert_raises(RuntimeError) { @r.exec }
+    assert_raises(RuntimeError) { @r.exec('Jurgen') }
   end
 end
