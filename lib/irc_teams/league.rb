@@ -6,7 +6,7 @@ class League
   end
 
   def create_team(team_name)
-    raise LeagueError, "Team #{ team_name } already exists" if @teams[team_name]
+    raise TeamAlreadyExistsError, "Team #{ team_name } already exists" if @teams[team_name]
     @teams[team_name] = Team.new(team_name)
   end
 
@@ -41,4 +41,5 @@ class LeagueError < StandardError ; end
 class NonExistentTeamError < LeagueError ; end
 class NonExistentPlayerError < LeagueError ; end
 class NotOnTeamError < LeagueError ; end
+class TeamAlreadyExistsError < LeagueError ; end
 
