@@ -41,6 +41,14 @@ describe Controller do
                  @c.show_all_teams )
   end
 
+  it 'can show all the players on a team' do
+    @c.add_player('Sagna', 'Arsenal')
+    @c.add_player('Gibbs', 'Arsenal')
+    @c.add_player('Walcott', 'Arsenal')
+    assert_equal([:show_team, {:team => 'Arsenal', :players => ['Sagna', 'Gibbs', 'Walcott']}],
+                 @c.show_team('Arsenal'))
+  end
+
   it 'can show what team a player is on' do
     @c.add_player('Sagna', 'Arsenal')
     assert_equal([:show_player_team, { :player => 'Sagna', :team => 'Arsenal' } ],

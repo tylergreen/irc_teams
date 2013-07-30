@@ -15,6 +15,10 @@ class Controller
     end
   end
 
+  def show_team(team_name)
+    @view.show(:show_team, :team => team_name, :players => @league.find_team(team_name).to_a)
+  end
+
   def add_player(player, team_name)
     begin
       bindings = { :player => player, :team => team_name }
