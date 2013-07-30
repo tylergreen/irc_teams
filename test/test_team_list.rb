@@ -18,4 +18,19 @@ describe TeamList do
     assert_includes(@list.teams['Napoli'], 'Gervinho')
   end
 
+  it 'can remove someone from a team' do
+    assert( @list.remove_player('Gervinho', 'Napoli'))
+    assert(not(@list.find_team('Napoli').include?('Gervinho')))
+  end
+
+  it 'can find what team a player is on' do
+    assert( @list.add_player('Gervinho', 'Napoli'))
+    assert_equal('Napoli', @list.find_team_by_player('Gervinho').name)
+  end
+
+  it 'can remove a team' do
+    assert(@list.find_team('Napoli'))
+    @list.remove_team('Napoli')
+    assert_raises(RuntimeError) { @list.find_team('Napoli') } 
+  end
 end

@@ -23,7 +23,14 @@ class TeamList
   def remove_player(player, team_name)
     team = @teams[team_name]
     raise "no team named #{ team_name}" unless team
-    
-    
+    team.delete(player)
+  end
+
+  def find_team_by_player(player)
+    @teams.values.find{ |t| t.include?(player) }
+  end
+
+  def remove_team(team_name)
+    @teams.delete(team_name)
   end
 end
